@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Vite plugins
+components.d.ts
+auto-imports.d.ts
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
