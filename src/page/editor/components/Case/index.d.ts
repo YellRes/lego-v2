@@ -6,29 +6,13 @@ interface IComponentConfig {
 }
 
 // 定义组件类型
+/**
+ * TODO: IComponent.config的类型 是 IComponent.configData 数组中 IComponentConfig.key的集合
+ * */
 interface IComponent {
   name: string
   key: string
   type: string
   configData: Array<IComponentConfig>
-  config: Record<IComponentConfig[key], unknown>
+  config: Record<string, unknown>
 }
-
-// const componentConfig: IComponentConfig = {
-//   name: '姓名',
-//   key: 'name',
-//   type: 'input'
-// }
-
-// const component: IComponent = {
-//   name: '测试',
-//   key: 'test',
-//   type: 'input',
-//   configData: [componentConfig],
-//   config: {
-//     name: '测试',
-
-//     key: 'test',
-//     type: 'input'
-//   }
-// }
