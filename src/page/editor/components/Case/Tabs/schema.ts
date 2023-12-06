@@ -1,4 +1,4 @@
-import type { ILegoComponent } from '../../../../../types/index'
+import type { ILegoComponent } from '@/types/index'
 
 const Tabs: ILegoComponent = {
   name: 'tab',

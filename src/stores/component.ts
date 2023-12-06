@@ -23,7 +23,7 @@ export const userAllComponent = defineStore('component', () => {
     componentInfo: Object.keys(allComponentRenderTemplate).reduce(
       (pre, cur) => {
         const matched = cur.match(getCompNameReg)
-        debugger
+
         const currentComponentConfig = allComponentConfigArr.find(
           (item: ILegoComponent) => item.type === matched![1]
         )

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Case from './ComponentCase.vue'
 import ConfigDetail from './ConfigDetail.vue'
+import Preview from './Preview.vue'
 const commonStyle = {
   background: 'transparent',
   border: '1px solid #ededed'
@@ -23,10 +24,9 @@ const siderWidth = 300
           <Case />
         </a-layout-sider>
 
-        <a-layout-content
-          class="h-[100%]"
-          :style="commonStyle"
-        ></a-layout-content>
+        <a-layout-content class="h-[100%] p-[8px]" :style="commonStyle">
+          <Preview />
+        </a-layout-content>
 
         <a-layout-sider
           class="h-[100%]"
