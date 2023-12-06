@@ -9,10 +9,17 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
   plugins: [
     vue(),
     AutoImport({
-      imports: ['vue']
+      imports: ['vue', 'pinia'],
+      vueTemplate: true,
+      dts: true
     }),
     Components({
       resolvers: [
