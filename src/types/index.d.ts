@@ -1,5 +1,5 @@
 // 定义组件详情配置
-interface IComponentConfig {
+export interface ILegoComponentConfig {
   name: string
   key: string
   type: string
@@ -9,10 +9,10 @@ interface IComponentConfig {
 /**
  * TODO: IComponent.config的类型 是 IComponent.configData 数组中 IComponentConfig.key的集合
  * */
-interface IComponent {
+export interface ILegoComponent {
   name: string
   key: string
   type: string
-  configData: Array<IComponentConfig>
-  config: Record<string, unknown>
+  configOptions: Array<IComponentConfig>
+  configData: Record<string, unknown>
 }

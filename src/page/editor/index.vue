@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Case from './components/Case/index.vue'
+import Case from './ComponentCase.vue'
+import ConfigDetail from './ConfigDetail.vue'
 const commonStyle = {
   background: 'transparent',
   border: '1px solid #ededed'
 }
 
-const siderWidth = 400
+const siderWidth = 300
 </script>
 
 <template>
@@ -31,7 +32,9 @@ const siderWidth = 400
           class="h-[100%]"
           :style="commonStyle"
           :width="siderWidth"
-        ></a-layout-sider>
+        >
+          <ConfigDetail />
+        </a-layout-sider>
       </a-layout>
     </a-layout>
   </a-style-provider>
