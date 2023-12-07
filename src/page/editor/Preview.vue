@@ -1,5 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Calibration from './components/Calibration.vue'
+
+const previewRef = ref()
+</script>
 
 <template>
-  <div class="bg-white h-[100%]">preview</div>
+  <div class="bg-white h-[100%]" ref="previewRef">
+    preview
+
+    <Calibration :container-ref="previewRef" :step="10" :mark-tag="100" />
+  </div>
 </template>
