@@ -17,7 +17,7 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports: ['vue', 'pinia'],
+      imports: ['vue', 'pinia', '@vueuse/core'],
       vueTemplate: true,
       dts: true
     }),
