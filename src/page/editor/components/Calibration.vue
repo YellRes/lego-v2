@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import type { MaybeComputedElementRef } from '@vueuse/core'
+
+// 长短刻度的长度
+const BASE_HEIGHT = 10
+const LARGE_HEIGHT = 20
 interface Props {
   position?: 'top' | 'bottom' | 'left' | 'right'
   step?: number
@@ -8,9 +12,6 @@ interface Props {
   offSet?: number
 }
 
-// 长短刻度的长度
-const BASE_HEIGHT = 10
-const LARGE_HEIGHT = 20
 const props = withDefaults(defineProps<Props>(), {
   step: 10,
   markTag: 100,
@@ -28,19 +29,20 @@ const height = 50
 //   []
 // )
 const canvasRef = ref<HTMLCanvasElement>()
-// 如何根据 maxSize 画出刻度线
+let canvasOffset = 10
+// canvas的画图方法
 const renderCanvas = () => {
   const ctx = canvasRef.value?.getContext('2d')
   if (!ctx) return
   ctx.clearRect(0, 0, maxLength.value, height)
+  ctx.translate(canvasOffset, 0)
   ctx.beginPath()
   ctx.moveTo(0, 0)
 
   let currentLength = 0
 
-  while (currentLength <= maxLength.value) {
+  while (currentLength <= maxLength.value - canvasOffset) {
     ctx.lineTo(currentLength, 0)
-
     let currentY = currentLength % props.markTag ? BASE_HEIGHT : LARGE_HEIGHT
     ctx.lineTo(currentLength, currentY)
     if (!(currentLength % props.markTag)) {
@@ -57,12 +59,16 @@ const renderCanvas = () => {
   ctx.stroke()
   ctx.closePath()
 }
+
+// 监听父容器的大小
 watchEffect(() => {
   const { width, height } = useElementSize(props.containerRef)
+  // 属性值是 top bottom的时候 使用父容器的宽度
   if (props.position === 'top' || props.position === 'bottom') {
     maxLength.value =
       width.value - props.offSet > 0 ? width.value - props.offSet : 0
   } else {
+    // 其余情况使用高度
     maxLength.value =
       height.value - props.offSet ? height.value - props.offSet : 0
   }
