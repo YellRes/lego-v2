@@ -29,7 +29,7 @@ const height = 50
 //   []
 // )
 const canvasRef = ref<HTMLCanvasElement>()
-let canvasOffset = 10
+let canvasOffset = 5
 // canvas的画图方法
 const renderCanvas = () => {
   const ctx = canvasRef.value?.getContext('2d')
@@ -90,6 +90,7 @@ watchEffect(
   <canvas
     id="canvasDom"
     ref="canvasRef"
+    class="absolute"
     :width="maxLength"
     :height="height"
   ></canvas>
