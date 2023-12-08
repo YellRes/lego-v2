@@ -4,8 +4,11 @@ import type { MaybeComputedElementRef } from '@vueuse/core'
 // 长短刻度的长度
 const BASE_HEIGHT = 10
 const LARGE_HEIGHT = 20
+
+type PositionEnum = 'top' | 'right' | 'bottom' | 'left'
+
 interface Props {
-  position?: 'top' | 'bottom' | 'left' | 'right'
+  position?: PositionEnum
   step?: number
   containerRef?: MaybeComputedElementRef
   markTag?: number
@@ -21,19 +24,42 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const maxLength = ref<number>(0)
-// const canvasHeight = ref<number>(0)
-// const canvasWidth = ref<number>(0)
 const height = 50
 
-// const allCalibrationArr = ref<Array<{ value: number; isLongLength: boolean }>>(
-//   []
-// )
 const canvasRef = ref<HTMLCanvasElement>()
 let canvasOffset = 5
+
+// 当props.position变化后 canvas位置变化
+/**
+ * canvas ctx翻转后 绘制的文字也同时翻转
+ */
+const translateCtxByPosition = (ctx: CanvasRenderingContext2D) => {
+  switch (props.position) {
+    case 'top':
+      break
+
+    case 'bottom':
+      ctx.translate(0, height)
+      ctx.scale(1, -1)
+      break
+  }
+}
+
+// 还原canvas的位置
+const resetCtxPosition = (ctx: CanvasRenderingContext2D) => {
+  switch (props.position) {
+    case 'bottom':
+      // ctx.translate(0, height)
+      ctx.scale(1, -1)
+      break
+  }
+}
 // canvas的画图方法
 const renderCanvas = () => {
   const ctx = canvasRef.value?.getContext('2d')
   if (!ctx) return
+  // 旋转画布
+  translateCtxByPosition(ctx)
   ctx.clearRect(0, 0, maxLength.value, height)
   ctx.translate(canvasOffset, 0)
   ctx.beginPath()
@@ -46,11 +72,13 @@ const renderCanvas = () => {
     let currentY = currentLength % props.markTag ? BASE_HEIGHT : LARGE_HEIGHT
     ctx.lineTo(currentLength, currentY)
     if (!(currentLength % props.markTag)) {
+      if (props.position === 'bottom') resetCtxPosition(ctx)
       ctx.fillText(
         `${currentLength}`,
         currentLength - `${currentLength}`.length * 4,
-        currentY + 10
+        props.position === 'bottom' ? -(currentY + 10) : currentY + 10
       )
+      if (props.position === 'bottom') resetCtxPosition(ctx)
     }
 
     ctx.moveTo(currentLength, 0)
