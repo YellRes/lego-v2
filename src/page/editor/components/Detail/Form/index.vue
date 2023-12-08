@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ILegoComponentConfig } from '../../index.d.ts'
+import type { ILegoComponentConfig } from '@/types/index'
 interface Props {
   settings?: Array<ILegoComponentConfig>
 }
@@ -38,4 +38,3 @@ watchEffect(() => {
   </a-form>
   <a-empty v-else :description="null" />
 </template>
-../../../../../types/index
