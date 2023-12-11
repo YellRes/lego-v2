@@ -101,6 +101,19 @@ const renderCanvas = () => {
   ctx.closePath()
 }
 
+// className
+const className = computed(() => {
+  let className = ['absolute']
+
+  // ! ml-[${props.offSet}px] 不生效
+  if (props.position === 'top') {
+    className.push(`ml-[40px]`)
+  } else if (props.position === 'left') {
+    className.push(`mt-[40px]`)
+  }
+
+  return className
+})
 // 监听父容器的大小
 watchEffect(() => {
   const { width: containerWidth, height: containerHeight } = useElementSize(
@@ -141,9 +154,7 @@ watchEffect(
   <canvas
     id="canvasDom"
     ref="canvasRef"
-    :class="`absolute ${props.position === 'top' ? 'ml-' + props.offSet : ''} ${
-      props.position === 'left' ? 'mt-' + props.offSet : ''
-    }`"
+    :class="className"
     :width="width"
     :height="height"
   ></canvas>

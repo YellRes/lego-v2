@@ -9,6 +9,7 @@ const previewRef = ref()
     <Calibration
       :container-ref="previewRef"
       :step="10"
+      :off-set="40"
       :mark-tag="100"
       style="left: 0; top: 0"
     />
@@ -17,6 +18,7 @@ const previewRef = ref()
       :container-ref="previewRef"
       :step="10"
       :mark-tag="100"
+      :off-set="40"
       :position="'left'"
       style="left: 0; top: 0"
     />

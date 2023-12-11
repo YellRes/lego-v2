@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { userAllComponent } from '@/stores/component.ts'
+import draggable from 'vuedraggable'
+
 const searchVal = ref<string>('')
 const handleSearch = () => {}
 
@@ -17,9 +19,16 @@ const store = userAllComponent()
       />
 
       <!-- 所有的可用组件 -->
-      <div v-for="(item, index) in store.componentInfo" :key="index">
-        {{ item.name }}
-      </div>
+      <draggable
+        v-model="store.componentInfo"
+        group="component"
+        item-key="type"
+        :move="() => false"
+      >
+        <template #item="{ element }">
+          <a-card>{{ element.name }}</a-card>
+        </template>
+      </draggable>
     </a-tab-pane>
   </a-tabs>
 </template>
