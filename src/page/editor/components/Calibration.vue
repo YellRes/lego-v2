@@ -2,8 +2,8 @@
 import type { MaybeComputedElementRef } from '@vueuse/core'
 
 // 长短刻度的长度
-const BASE_HEIGHT = 10
-const LARGE_HEIGHT = 20
+const BASE_HEIGHT = 5
+const LARGE_HEIGHT = 8
 
 type PositionEnum = 'top' | 'right' | 'bottom' | 'left'
 
@@ -23,8 +23,9 @@ const props = withDefaults(defineProps<Props>(), {
   containerRef: null
 })
 
+const width = ref<number>(0)
+const height = ref<number>(50)
 const maxLength = ref<number>(0)
-const height = 50
 
 const canvasRef = ref<HTMLCanvasElement>()
 let canvasOffset = 5
@@ -39,8 +40,13 @@ const translateCtxByPosition = (ctx: CanvasRenderingContext2D) => {
       break
 
     case 'bottom':
-      ctx.translate(0, height)
+      ctx.translate(0, height.value)
       ctx.scale(1, -1)
+      break
+
+    case 'left':
+      ctx.scale(1, -1)
+      ctx.rotate(-Math.PI * 0.5)
       break
   }
 }
@@ -49,7 +55,10 @@ const translateCtxByPosition = (ctx: CanvasRenderingContext2D) => {
 const resetCtxPosition = (ctx: CanvasRenderingContext2D) => {
   switch (props.position) {
     case 'bottom':
-      // ctx.translate(0, height)
+      ctx.scale(1, -1)
+      break
+    case 'left':
+      ctx.rotate(Math.PI * 0.5)
       ctx.scale(1, -1)
       break
   }
@@ -60,7 +69,7 @@ const renderCanvas = () => {
   if (!ctx) return
   // 旋转画布
   translateCtxByPosition(ctx)
-  ctx.clearRect(0, 0, maxLength.value, height)
+  ctx.clearRect(0, 0, maxLength.value, height.value)
   ctx.translate(canvasOffset, 0)
   ctx.beginPath()
   ctx.moveTo(0, 0)
@@ -72,13 +81,17 @@ const renderCanvas = () => {
     let currentY = currentLength % props.markTag ? BASE_HEIGHT : LARGE_HEIGHT
     ctx.lineTo(currentLength, currentY)
     if (!(currentLength % props.markTag)) {
-      if (props.position === 'bottom') resetCtxPosition(ctx)
+      if (props.position === 'left' || props.position === 'bottom')
+        resetCtxPosition(ctx)
       ctx.fillText(
         `${currentLength}`,
-        currentLength - `${currentLength}`.length * 4,
-        props.position === 'bottom' ? -(currentY + 10) : currentY + 10
+        props.position === 'left'
+          ? 20
+          : currentLength - `${currentLength}`.length * 4,
+        props.position === 'left' ? currentLength + 4 : currentY + 10
       )
-      if (props.position === 'bottom') resetCtxPosition(ctx)
+      if (props.position === 'left' || props.position === 'bottom')
+        resetCtxPosition(ctx)
     }
 
     ctx.moveTo(currentLength, 0)
@@ -90,15 +103,25 @@ const renderCanvas = () => {
 
 // 监听父容器的大小
 watchEffect(() => {
-  const { width, height } = useElementSize(props.containerRef)
+  const { width: containerWidth, height: containerHeight } = useElementSize(
+    props.containerRef
+  )
   // 属性值是 top bottom的时候 使用父容器的宽度
   if (props.position === 'top' || props.position === 'bottom') {
-    maxLength.value =
-      width.value - props.offSet > 0 ? width.value - props.offSet : 0
+    width.value = maxLength.value =
+      containerWidth.value - props.offSet > 0
+        ? containerWidth.value - props.offSet
+        : 0
+
+    height.value = 50
   } else {
     // 其余情况使用高度
-    maxLength.value =
-      height.value - props.offSet ? height.value - props.offSet : 0
+    height.value = maxLength.value =
+      containerHeight.value - props.offSet
+        ? containerHeight.value - props.offSet
+        : 0
+
+    width.value = 50
   }
 })
 
@@ -118,8 +141,10 @@ watchEffect(
   <canvas
     id="canvasDom"
     ref="canvasRef"
-    class="absolute"
-    :width="maxLength"
+    :class="`absolute ${props.position === 'top' ? 'ml-' + props.offSet : ''} ${
+      props.position === 'left' ? 'mt-' + props.offSet : ''
+    }`"
+    :width="width"
     :height="height"
   ></canvas>
 </template>
