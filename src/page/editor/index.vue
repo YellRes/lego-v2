@@ -24,7 +24,7 @@ const siderWidth = 300
           <Case />
         </a-layout-sider>
 
-        <a-layout-content class="h-[100%] p-[8px]" :style="commonStyle">
+        <a-layout-content class="h-[100%]" :style="commonStyle">
           <Preview />
         </a-layout-content>
 
