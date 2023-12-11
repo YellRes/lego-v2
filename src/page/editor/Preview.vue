@@ -6,21 +6,11 @@ const previewRef = ref()
 
 <template>
   <div class="bg-white h-[100%] relative" ref="previewRef">
-    <Calibration :container-ref="previewRef" :step="10" :mark-tag="100" />
-
     <Calibration
       :container-ref="previewRef"
       :step="10"
       :mark-tag="100"
-      :position="'bottom'"
-      style="bottom: 0"
-    />
-
-    <!-- <Calibration
-      :container-ref="previewRef"
-      :step="10"
-      :mark-tag="100"
-      :position="'right'"
+      style="left: 0; top: 0"
     />
 
     <Calibration
@@ -28,6 +18,7 @@ const previewRef = ref()
       :step="10"
       :mark-tag="100"
       :position="'left'"
-    /> -->
+      style="left: 0; top: 0"
+    />
   </div>
 </template>
