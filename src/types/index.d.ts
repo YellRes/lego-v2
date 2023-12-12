@@ -16,3 +16,10 @@ export interface ILegoComponent {
   configOptions: Array<IComponentConfig>
   configData: Record<string, unknown>
 }
+
+// 预览组件类型
+export interface ILegoPreviewComponent extends ILegoComponent {
+  x: number
+  y: number
+  id: string
+}

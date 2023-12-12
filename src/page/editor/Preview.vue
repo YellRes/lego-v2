@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Calibration from './components/Calibration.vue'
-
-const previewRef = ref()
+const previewRef = ref(null)
 </script>
 
 <template>
   <div class="bg-white h-[100%] relative" ref="previewRef">
+    <!-- 顶部刻度线 -->
     <Calibration
       :container-ref="previewRef"
       :step="10"
@@ -14,6 +14,7 @@ const previewRef = ref()
       style="left: 0; top: 0"
     />
 
+    <!-- 左边刻度线 -->
     <Calibration
       :container-ref="previewRef"
       :step="10"

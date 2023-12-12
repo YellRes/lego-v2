@@ -6,6 +6,13 @@ const searchVal = ref<string>('')
 const handleSearch = () => {}
 
 const store = userAllComponent()
+const getComponentData = () => {
+  return {
+    on: {
+      end() {}
+    }
+  }
+}
 </script>
 
 <template>
@@ -24,6 +31,7 @@ const store = userAllComponent()
         group="component"
         item-key="type"
         :move="() => false"
+        :component-data="getComponentData()"
       >
         <template #item="{ element }">
           <a-card>{{ element.name }}</a-card>

@@ -1,4 +1,4 @@
-import type { ILegoComponent } from '@/types/index'
+import type { ILegoComponent, ILegoPreviewComponent } from '@/types/index'
 
 export const userAllComponent = defineStore('component', () => {
   // 组件模板
@@ -19,6 +19,12 @@ export const userAllComponent = defineStore('component', () => {
   // 提取组件名称
   const getCompNameReg = /\/([^/]+)\/index\.vue$/
 
+  // 当前使用的component
+  const currentPreviewComponentArr = ref<ILegoPreviewComponent[]>([])
+  function changePreviewComponentArr(val: ILegoPreviewComponent[]) {
+    currentPreviewComponentArr.value = val
+  }
+
   return {
     componentInfo: Object.keys(allComponentRenderTemplate).reduce(
       (pre, cur) => {
@@ -30,12 +36,14 @@ export const userAllComponent = defineStore('component', () => {
 
         console.log(currentComponentConfig)
         pre.push({
-          ...currentComponentConfig,
-          render: allComponentRenderTemplate[cur]
+          ...currentComponentConfig
+          // render: allComponentRenderTemplate[cur]
         })
         return pre
       },
       []
-    )
+    ),
+    currentPreviewComponentArr,
+    changePreviewComponentArr
   }
 })
