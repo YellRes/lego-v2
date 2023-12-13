@@ -19,10 +19,14 @@ export const userAllComponent = defineStore('component', () => {
   // 提取组件名称
   const getCompNameReg = /\/([^/]+)\/index\.vue$/
 
-  // 当前使用的component
   const currentPreviewComponentArr = ref<ILegoPreviewComponent[]>([])
-  function changePreviewComponentArr(val: ILegoPreviewComponent[]) {
-    currentPreviewComponentArr.value = val
+  function addPreviewComponentArr(val: ILegoPreviewComponent) {
+    currentPreviewComponentArr.value.push(val)
+  }
+  // 当前使用的component
+  const currentPreviewComponent = ref<ILegoPreviewComponent>()
+  function changeCurrentPreviewComponent(val: ILegoPreviewComponent) {
+    currentPreviewComponent.value = val
   }
 
   return {
@@ -44,6 +48,8 @@ export const userAllComponent = defineStore('component', () => {
       []
     ),
     currentPreviewComponentArr,
-    changePreviewComponentArr
+    addPreviewComponentArr,
+    currentPreviewComponent,
+    changeCurrentPreviewComponent
   }
 })

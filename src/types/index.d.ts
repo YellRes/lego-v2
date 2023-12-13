@@ -19,7 +19,7 @@ export interface ILegoComponent {
 
 // 预览组件类型
 export interface ILegoPreviewComponent extends ILegoComponent {
-  x: number
-  y: number
+  top: number
+  left: number
   id: string
 }

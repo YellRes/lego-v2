@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { userAllComponent } from '@/stores/component.ts'
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 
 const searchVal = ref<string>('')
 const handleSearch = () => {}
@@ -8,8 +8,11 @@ const handleSearch = () => {}
 const store = userAllComponent()
 const getComponentData = () => {
   return {
-    on: {
-      end() {}
+    onStart(dragEvent: Record<string, unknown>) {
+      const { oldIndex } = dragEvent
+      store.changeCurrentPreviewComponent(
+        store.componentInfo[oldIndex as number]
+      )
     }
   }
 }
@@ -26,7 +29,7 @@ const getComponentData = () => {
       />
 
       <!-- 所有的可用组件 -->
-      <draggable
+      <Draggable
         v-model="store.componentInfo"
         group="component"
         item-key="type"
@@ -36,7 +39,7 @@ const getComponentData = () => {
         <template #item="{ element }">
           <a-card>{{ element.name }}</a-card>
         </template>
-      </draggable>
+      </Draggable>
     </a-tab-pane>
   </a-tabs>
 </template>
