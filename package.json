@@ -15,7 +15,9 @@
     "@vueuse/core": "^10.7.0",
     "ant-design-vue": "4.x",
     "pinia": "^2.1.7",
+    "uuid": "^9.0.1",
     "vue": "^3.3.8",
+    "vue3-moveable": "^0.28.0",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
