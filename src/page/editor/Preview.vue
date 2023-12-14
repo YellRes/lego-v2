@@ -10,14 +10,23 @@ const previewRef = ref(null)
 // const canvasZone = ref(null)
 // const { x, y } = useMouseInElement(canvasZone)
 const handleDrop = (e: DragEvent) => {
-  const { x, y } = e
+  if (!previewRef.value) return
+  const { clientX, clientY } = e
+  const { offsetTop, offsetLeft } = previewRef.value
+
   componentStore.currentPreviewComponent &&
     componentStore.addPreviewComponentArr({
       ...componentStore.currentPreviewComponent,
-      left: x,
-      top: y,
+      left: clientX - offsetLeft,
+      top: clientY - offsetTop,
       id: 'lego' + uuidv4().replace(/-/g, '')
     })
+}
+
+const handleContextMenuClick = (e) => {
+  const { eventName } = e
+  if (eventName === 'delete') {
+  }
 }
 </script>
 
@@ -53,15 +62,17 @@ const handleDrop = (e: DragEvent) => {
         :key="previewItem.key"
       />
     </div>
+
+    <!-- 右键菜单 -->
+    <RightClickMenu
+      :container="previewRef"
+      :options="[
+        {
+          label: '删除',
+          eventName: 'delete'
+        }
+      ]"
+      @click-context-menu="handleContextMenuClick"
+    />
   </div>
-  <!-- 右键菜单 -->
-  <RightClickMenu
-    :container="previewRef"
-    :options="[
-      {
-        label: '删除',
-        eventName: 'delete'
-      }
-    ]"
-  />
 </template>

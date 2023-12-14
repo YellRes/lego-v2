@@ -23,6 +23,11 @@ export const userAllComponent = defineStore('component', () => {
   function addPreviewComponentArr(val: ILegoPreviewComponent) {
     currentPreviewComponentArr.value.push(val)
   }
+  function deletePreviewComponentItem(id: string) {
+    currentPreviewComponentArr.value = currentPreviewComponentArr.value.filter(
+      (item) => item.id !== id
+    )
+  }
   // 当前使用的component
   const currentPreviewComponent = ref<ILegoPreviewComponent>()
   function changeCurrentPreviewComponent(val: ILegoPreviewComponent) {
@@ -49,6 +54,7 @@ export const userAllComponent = defineStore('component', () => {
     ),
     currentPreviewComponentArr,
     addPreviewComponentArr,
+    deletePreviewComponentItem,
     currentPreviewComponent,
     changeCurrentPreviewComponent
   }

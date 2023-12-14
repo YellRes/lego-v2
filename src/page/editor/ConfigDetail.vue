@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import DetailForm from './components/Detail/Form/index.vue'
-import type { ILegoComponentConfig } from './components/index'
+import type { ILegoComponentConfig } from '@/types/index'
 interface Props {
   componentName: string
   componentConfig?: Array<ILegoComponentConfig>
@@ -22,4 +22,3 @@ const props = withDefaults(defineProps<Props>(), {
     <DetailForm :settings="props.componentConfig" />
   </div>
 </template>
-../../types/index
