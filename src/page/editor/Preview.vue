@@ -16,7 +16,7 @@ const handleDrop = (e: DragEvent) => {
       ...componentStore.currentPreviewComponent,
       left: x,
       top: y,
-      id: uuidv4()
+      id: 'lego' + uuidv4().replace(/-/g, '')
     })
 }
 </script>
@@ -49,9 +49,19 @@ const handleDrop = (e: DragEvent) => {
     >
       <PreviewItem
         v-for="previewItem in componentStore.currentPreviewComponentArr"
-        v-bind:key="previewItem.key"
         v-bind="previewItem"
+        :key="previewItem.key"
       />
     </div>
   </div>
+  <!-- 右键菜单 -->
+  <RightClickMenu
+    :container="previewRef"
+    :options="[
+      {
+        label: '删除',
+        eventName: 'delete'
+      }
+    ]"
+  />
 </template>

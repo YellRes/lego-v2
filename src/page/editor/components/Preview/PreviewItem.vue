@@ -3,8 +3,12 @@ import Moveable from 'vue3-moveable'
 import { ILegoPreviewComponent } from '@/types/index'
 const props = withDefaults(defineProps<ILegoPreviewComponent>(), {})
 
-const onDrag = () => {}
-const onScale = () => {}
+const onDrag = (e) => {
+  e.target.style.transform = e.transform
+}
+const onScale = (e) => {
+  e.target.style.transform = e.drag.transform
+}
 const onRotate = () => {}
 </script>
 
@@ -17,10 +21,10 @@ const onRotate = () => {}
   </div>
   <Moveable
     className="moveable"
-    v-bind:target="`#${props.id}`"
-    v-bind:draggable="true"
-    v-bind:scalable="true"
-    v-bind:rotatable="true"
+    :target="`#${props.id}`"
+    :draggable="true"
+    :scalable="true"
+    :rotatable="true"
     @drag="onDrag"
     @scale="onScale"
     @rotate="onRotate"
