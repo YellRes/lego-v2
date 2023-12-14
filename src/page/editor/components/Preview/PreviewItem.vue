@@ -10,13 +10,17 @@ const onScale = (e) => {
   e.target.style.transform = e.drag.transform
 }
 const onRotate = () => {}
+
+const styleObject = computed(() => {
+  return {
+    left: `${props.left}px`,
+    top: `${props.top}px`
+  }
+})
 </script>
 
 <template>
-  <div
-    :id="props.id"
-    :class="`absolute top-[${props.top || 0}px] left-[${props.left || 0}px]`"
-  >
+  <div :id="props.id" :class="`absolute `" :style="styleObject">
     {{ props.name }}
   </div>
   <Moveable
