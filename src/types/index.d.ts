@@ -15,6 +15,7 @@ export interface ILegoComponent {
   type: string
   configOptions: Array<IComponentConfig>
   configData: Record<string, unknown>
+  render: any
 }
 
 // 预览组件类型

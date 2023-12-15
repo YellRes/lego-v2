@@ -29,7 +29,7 @@ module.exports = {
   plugins: ['vue', 'prettier', '@typescript-eslint'],
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
-    "@typescript-eslint/no-explicit-any": "off",
+    '@typescript-eslint/no-explicit-any': 'off',
     'vue/multi-word-component-names': [
       'off',
       {

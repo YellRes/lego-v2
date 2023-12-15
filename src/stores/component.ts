@@ -14,7 +14,7 @@ export const userAllComponent = defineStore('component', () => {
     import.meta.glob('../page/editor/components/Case/**/schema.ts', {
       eager: true
     })
-  ).map((item) => item?.default)
+  ).map((item: any) => item?.default)
 
   // 提取组件名称
   const getCompNameReg = /\/([^/]+)\/index\.vue$/
@@ -56,14 +56,14 @@ export const userAllComponent = defineStore('component', () => {
           (item: ILegoComponent) => item.type === matched![1]
         )
 
-        console.log(currentComponentConfig)
-        pre.push({
-          ...currentComponentConfig
-          // render: allComponentRenderTemplate[cur]
-        })
+        currentComponentConfig &&
+          pre.push({
+            ...currentComponentConfig,
+            render: markRaw(allComponentRenderTemplate[cur]!.default)
+          })
         return pre
       },
-      []
+      [] as ILegoComponent[]
     ),
     // preview
     addPreviewComponentArr,
