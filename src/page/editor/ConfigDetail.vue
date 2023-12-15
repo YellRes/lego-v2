@@ -2,7 +2,7 @@
 import DetailForm from './components/Detail/Form/index.vue'
 import type { ILegoComponentConfig } from '@/types/index'
 interface Props {
-  componentName: string
+  componentName?: string
   componentConfig?: Array<ILegoComponentConfig>
 }
 const props = withDefaults(defineProps<Props>(), {
