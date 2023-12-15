@@ -2,7 +2,7 @@ import type { ILegoComponent } from '../../../../../types/index'
 
 const Card: ILegoComponent = {
   name: '卡片',
-  key: 'card',
+  field: 'card',
   type: 'Card',
   configOptions: [
     {

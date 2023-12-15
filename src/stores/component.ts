@@ -20,13 +20,26 @@ export const userAllComponent = defineStore('component', () => {
   const getCompNameReg = /\/([^/]+)\/index\.vue$/
 
   const currentPreviewComponentArr = ref<ILegoPreviewComponent[]>([])
+  // 添加组件
   function addPreviewComponentArr(val: ILegoPreviewComponent) {
     currentPreviewComponentArr.value.push(val)
   }
+  // 删除组件
   function deletePreviewComponentItem(id: string) {
     currentPreviewComponentArr.value = currentPreviewComponentArr.value.filter(
       (item) => item.id !== id
     )
+  }
+  // 修改组件信息
+  function changePreviewComponentItem(
+    id: string,
+    val: Partial<ILegoPreviewComponent>
+  ) {
+    const previewComponent = currentPreviewComponentArr.value.find(
+      (item) => item.id === id
+    )
+
+    previewComponent && Object.assign(previewComponent, val)
   }
   // 当前使用的component
   const currentPreviewComponent = ref<ILegoPreviewComponent>()
@@ -52,9 +65,12 @@ export const userAllComponent = defineStore('component', () => {
       },
       []
     ),
-    currentPreviewComponentArr,
+    // preview
     addPreviewComponentArr,
     deletePreviewComponentItem,
+    changePreviewComponentItem,
+    // case
+    currentPreviewComponentArr,
     currentPreviewComponent,
     changeCurrentPreviewComponent
   }

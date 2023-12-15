@@ -18,10 +18,12 @@ const emits = defineEmits(['clickMenuItem'])
 const isShow = ref<boolean>(false)
 const rightClickMenuRef = ref<HTMLElement | null>(null)
 const handleContextMenuClick = (e: IRightClickMenuOptionItem) => {
+  emits('clickMenuItem', { ...e, x: offsetX, y: offsetY })
   isShow.value = false
-  emits('clickMenuItem', e)
 }
 
+let offsetX = 0
+let offsetY = 0
 watch(
   () => props.container,
   () => {
@@ -30,7 +32,6 @@ watch(
       isShow.value = true
       await nextTick()
       if (!rightClickMenuRef.value || !props.container) return
-      // 右击点到弹框后 不触发事件
 
       const { clientX, clientY } = e
       // 容器的左上角坐标
@@ -39,8 +40,8 @@ watch(
       const { clientHeight, clientWidth } = rightClickMenuRef.value
 
       // 鼠标在prop.container中的位置
-      const offsetX = clientX - offsetLeft
-      const offsetY = clientY - offsetTop
+      offsetX = clientX - offsetLeft
+      offsetY = clientY - offsetTop
       // 判断边界
       rightClickMenuRef.value.style.top = `${
         offsetY + clientHeight > props.container.clientHeight

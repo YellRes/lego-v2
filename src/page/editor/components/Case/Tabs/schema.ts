@@ -2,7 +2,7 @@ import type { ILegoComponent } from '@/types/index'
 
 const Tabs: ILegoComponent = {
   name: 'tab',
-  key: 'tabs',
+  field: 'tabs',
   type: 'Tabs',
   configOptions: [
     {
