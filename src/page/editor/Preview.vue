@@ -5,6 +5,10 @@ import Calibration from './components/Calibration.vue'
 import PreviewItem from './components/Preview/PreviewItem.vue'
 import { isPointInEditorComponent } from '@/utils/editor'
 
+const HEIGHT_OFFSET = 10
+const PREVIEW_COMP_WIDTH = 100
+// const PREVIEW_COMP_HEIGHT = 50
+
 const componentStore = userAllComponent()
 const previewRef = ref(null)
 
@@ -18,9 +22,8 @@ const handleDrop = (e: DragEvent) => {
   componentStore.currentPreviewComponent &&
     componentStore.addPreviewComponentArr({
       ...componentStore.currentPreviewComponent,
-      width: 100,
-      height: 50,
-      left: clientX - offsetLeft,
+      width: PREVIEW_COMP_WIDTH,
+      left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
       top: clientY - offsetTop,
       id: 'lego' + uuidv4().replace(/-/g, '')
     })
@@ -50,8 +53,8 @@ const handleTransformChange = (e) => {
   } else if (transformLeft < 0) {
     transformLeft = 0
   }
-  if (transformTop + height > containerHeight.value) {
-    transformTop = containerHeight.value - height
+  if (transformTop + height > containerHeight.value - HEIGHT_OFFSET) {
+    transformTop = containerHeight.value - height - HEIGHT_OFFSET
   } else if (transformTop < 0) {
     transformTop = 0
   }
@@ -109,6 +112,7 @@ const handleContextMenuClick = (e) => {
       style="left: 0; top: 0"
     />
 
+    <!-- 画板中的组件 -->
     <div
       class="drop-zone h-[100%] relative p-[50px]"
       @dragover.prevent

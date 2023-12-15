@@ -2,11 +2,11 @@
 import Moveable from 'vue3-moveable'
 import { ILegoPreviewComponent } from '@/types/index'
 
-const THRESHOLD = 0.5
+// const THRESHOLD = 1
 const props = withDefaults(defineProps<ILegoPreviewComponent>(), {})
 const emits = defineEmits(['transformChange'])
 
-const onDrag = (e) => {
+const onDrag = (e: any) => {
   console.log(e)
   const [deltaX, deltaY] = e.beforeDelta
   emits('transformChange', {
@@ -18,7 +18,7 @@ const onDrag = (e) => {
   })
 }
 
-const onScale = useThrottleFn((e) => {
+const onScale = (e: any) => {
   console.log(e)
   const [scaleX, scaleY] = e.delta
   emits('transformChange', {
@@ -28,7 +28,7 @@ const onScale = useThrottleFn((e) => {
     scaleHeight: scaleY,
     ...props
   })
-}, 500)
+}
 
 const styleObject = computed(() => {
   return {
@@ -38,11 +38,13 @@ const styleObject = computed(() => {
     height: `${props.height}px`
   }
 })
+
+const componentName = markRaw(props.render)
 </script>
 
 <template>
   <div :id="props.id" :class="`absolute `" :style="styleObject">
-    {{ props.name }}
+    <component :is="componentName" v-bind="props.configData" />
   </div>
 
   <Moveable
@@ -50,8 +52,6 @@ const styleObject = computed(() => {
     :target="`#${props.id}`"
     :draggable="true"
     :scalable="true"
-    :throttleDrag="THRESHOLD"
-    :throttleScale="THRESHOLD"
     @drag="onDrag"
     @scale="onScale"
   />

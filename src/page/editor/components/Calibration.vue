@@ -138,16 +138,11 @@ watchEffect(() => {
   }
 })
 
-watchEffect(
-  () => {
-    renderCanvas()
-  },
-  {
-    // TODO: 必须加上post 不然不生效
-    // watchEffect 默认在组件更新前执行 但canvas的绘制方法要放到组件更新后执行
-    flush: 'post'
-  }
-)
+watchEffect(renderCanvas, {
+  // TODO: 必须加上post 不然不生效
+  // watchEffect 默认在组件更新前执行 但canvas的绘制方法要放到组件更新后执行
+  flush: 'post'
+})
 </script>
 
 <template>
