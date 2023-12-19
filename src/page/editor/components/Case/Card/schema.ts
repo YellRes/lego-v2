@@ -1,6 +1,6 @@
-import type { ILegoComponent } from '../../../../../types/index'
+import type { ILegoComponent, ICardCase } from '../../../../../types/index'
 
-const Card: ILegoComponent = {
+const Card: ILegoComponent<ICardCase> = {
   name: '卡片',
   field: 'card',
   type: 'Card',
@@ -21,7 +21,11 @@ const Card: ILegoComponent = {
       type: 'LInput'
     }
   ],
-  configData: {}
+  configData: {
+    imageUrl: '@/assets/image.svg',
+    title: '标题',
+    content: '暂无简介'
+  }
 }
 
 export default Card
