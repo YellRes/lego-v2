@@ -43,9 +43,13 @@ const componentName = markRaw(props.render)
 </script>
 
 <template>
-  <div :id="props.id" :class="`absolute `" :style="styleObject">
-    <component :is="componentName" v-bind="props.configData" />
-  </div>
+  <component
+    :is="componentName"
+    v-bind="props.configData"
+    :id="props.id"
+    :class="`absolute`"
+    :style="styleObject"
+  />
 
   <Moveable
     className="moveable"

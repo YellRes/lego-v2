@@ -5,9 +5,25 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useFormComponent } from './useFormComponent'
+const props = withDefaults(
+  defineProps<{
+    value: number | string
+  }>(),
+  {
+    value: ''
+  }
+)
 const attr = useAttrs()
-const { formValue, handleChange } = useFormComponent<string>(attr.value || '')
+console.log(attr)
+console.log(props.value)
+const emits = defineEmits(['change'])
+
+const formValue = ref<string>(attr.value)
+const handleChange = (newValue: string) => {
+  emits('change', newValue)
+}
+
+// const { formValue, handleChange } = useFormComponent<string>(attr.value || '')
 </script>
 
 <template>
