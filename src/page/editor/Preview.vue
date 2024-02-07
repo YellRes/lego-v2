@@ -7,7 +7,7 @@ import { isPointInEditorComponent } from '@/utils/editor'
 
 const HEIGHT_OFFSET = 10
 const PREVIEW_COMP_WIDTH = 100
-// const PREVIEW_COMP_HEIGHT = 50
+const PREVIEW_COMP_HEIGHT = 50
 
 const componentStore = userAllComponent()
 const previewRef = ref(null)
@@ -23,6 +23,7 @@ const handleDrop = (e: DragEvent) => {
     componentStore.addPreviewComponentArr({
       ...componentStore.currentPreviewComponent,
       width: PREVIEW_COMP_WIDTH,
+      height: PREVIEW_COMP_HEIGHT,
       left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
       top: clientY - offsetTop,
       id: 'lego' + uuidv4().replace(/-/g, '')

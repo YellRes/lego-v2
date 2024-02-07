@@ -35,6 +35,7 @@ module.exports = {
       {
         ignores: ['index']
       }
-    ]
+    ],
+    '@typescript-eslint/no-unused-vars': 'off'
   }
 }

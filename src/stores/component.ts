@@ -1,24 +1,26 @@
 import type { ILegoComponent, ILegoPreviewComponent } from '@/types/index'
 
+// console.log('store is hmring')
+
+// 组件模板
+const allComponentRenderTemplate = import.meta.glob(
+  '../page/editor/components/Case/**/*.vue',
+  {
+    eager: true
+  }
+)
+
+// 组件配置
+const allComponentConfigArr: Array<ILegoComponent> = Object.values(
+  import.meta.glob('../page/editor/components/Case/**/schema.ts', {
+    eager: true
+  })
+).map((item: any) => item?.default)
+
+// 提取组件名称
+const getCompNameReg = /\/([^/]+)\/index\.vue$/
+
 export const userAllComponent = defineStore('component', () => {
-  // 组件模板
-  const allComponentRenderTemplate = import.meta.glob(
-    '../page/editor/components/Case/**/*.vue',
-    {
-      eager: true
-    }
-  )
-
-  // 组件配置
-  const allComponentConfigArr: Array<ILegoComponent> = Object.values(
-    import.meta.glob('../page/editor/components/Case/**/schema.ts', {
-      eager: true
-    })
-  ).map((item: any) => item?.default)
-
-  // 提取组件名称
-  const getCompNameReg = /\/([^/]+)\/index\.vue$/
-
   const currentPreviewComponentArr = ref<ILegoPreviewComponent[]>([])
   // 添加组件
   function addPreviewComponentArr(val: ILegoPreviewComponent) {
