@@ -47,13 +47,13 @@ export const userAllComponent = defineStore('component', () => {
       (item) => item.id === id
     )
     currentPreviewComponent && Object.assign(currentPreviewComponent, val)
-    changeCurrentPreviewComProps(currentPreviewComponent!)
+    changeCurrentPreviewCom(currentPreviewComponent!)
   }
 
   // 当前使用的component
   const currentPreviewComponent =
     ref<Partial<ILegoPreviewComponent & ILegoComponent>>()
-  function changeCurrentPreviewComProps(
+  function changeCurrentPreviewCom(
     val: Partial<ILegoPreviewComponent & ILegoComponent>
   ) {
     currentPreviewComponent.value = val
@@ -85,6 +85,6 @@ export const userAllComponent = defineStore('component', () => {
     // case
     currentPreviewComponentArr,
     currentPreviewComponent,
-    changeCurrentPreviewComProps
+    changeCurrentPreviewCom
   }
 })

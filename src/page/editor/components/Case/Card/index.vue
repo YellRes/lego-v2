@@ -12,15 +12,12 @@ const props = withDefaults(defineProps<IPreviewCard>(), {
 </script>
 
 <template>
-  <div class="shadow-lg flex">
-    <!-- <img :src="props.imageUrl" class="w-[30px] h-[30px]" alt="" /> -->
-    <div class="flex flex-col">
-      <span class="text-ellipsis overflow-hidden text-lg">{{
-        props.title
-      }}</span>
-      <span class="text-ellipsis overflow-hidden">
-        {{ props.content }}
-      </span>
+  <div class="shadow-lg flex flex-col">
+    <div class="text-lg truncate">
+      {{ props.title }}
+    </div>
+    <div class="truncate">
+      {{ props.content }}
     </div>
   </div>
 </template>

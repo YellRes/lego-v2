@@ -12,7 +12,7 @@ const getComponentData = () => {
     onStart(dragEvent: Record<string, unknown>) {
       const { oldIndex } = dragEvent
 
-      store.changeCurrentPreviewComProps({
+      store.changeCurrentPreviewCom({
         ...store.componentInfo[oldIndex as number],
         id: 'lego' + v4().replace(/-/g, '')
       })

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import Moveable from 'vue3-moveable'
 import { ILegoPreviewComponent } from '@/types/index'
+import { userAllComponent } from '@/stores/component.ts'
+
+const componentStore = userAllComponent()
 
 // const THRESHOLD = 1
 const props = withDefaults(defineProps<ILegoPreviewComponent>(), {})
 const emits = defineEmits(['transformChange'])
+const { class: attrClass, ...other } = useAttrs()
 
 const onDrag = (e: any) => {
   console.log(e)
@@ -43,10 +47,16 @@ const componentName = markRaw(props.render)
 </script>
 
 <template>
-  <div>
+  <div v-bind="other">
+    <!-- TODO: 优化 添加class样式不该放到该组件 -->
     <component
       :id="props.id"
-      :class="`absolute `"
+      :class="[
+        props.id === componentStore.currentPreviewComponent?.id
+          ? 'outline outline-offset-2 outline-black-500'
+          : '',
+        'absolute'
+      ]"
       :style="styleObject"
       :is="componentName"
       v-bind="props.configData"
