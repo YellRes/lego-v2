@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Case from './ComponentCase.vue'
-import ConfigDetail from './ConfigDetail.vue'
+import ConfigDetail from './ConfigDetail/index.vue'
 import Preview from './Preview.vue'
 const commonStyle = {
   background: 'transparent',

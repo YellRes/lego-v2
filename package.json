@@ -14,6 +14,7 @@
   "dependencies": {
     "@vueuse/core": "^10.7.0",
     "ant-design-vue": "4.x",
+    "axios": "^1.6.7",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
     "vue": "^3.3.8",
@@ -21,6 +22,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "@vitejs/plugin-vue": "^4.5.0",

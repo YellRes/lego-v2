@@ -3,6 +3,7 @@ export interface ILegoComponentConfig {
   name: string
   field: string
   type: string
+  key: string
 }
 
 // 定义组件类型
@@ -13,9 +14,9 @@ export interface ILegoComponent {
   name: string
   field: string
   type: string
-  configOptions: Array<IComponentConfig>
+  configOptions: Array<Record<string, unknown>>
   configData: Record<string, unknown>
-  render: any
+  render?: any
 }
 
 // 预览组件类型

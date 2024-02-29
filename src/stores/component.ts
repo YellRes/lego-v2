@@ -8,7 +8,7 @@ const allComponentRenderTemplate = import.meta.glob(
   {
     eager: true
   }
-)
+) as any
 
 // 组件配置
 const allComponentConfigArr: Array<ILegoComponent> = Object.values(
@@ -21,35 +21,46 @@ const allComponentConfigArr: Array<ILegoComponent> = Object.values(
 const getCompNameReg = /\/([^/]+)\/index\.vue$/
 
 export const userAllComponent = defineStore('component', () => {
-  const currentPreviewComponentArr = ref<ILegoPreviewComponent[]>([])
+  const currentPreviewComponentArr = ref<
+    Partial<ILegoPreviewComponent & ILegoComponent>[]
+  >([])
   // 添加组件
-  function addPreviewComponentArr(val: ILegoPreviewComponent) {
+  function addPreviewComponentArr(
+    val: Partial<ILegoPreviewComponent & ILegoComponent>
+  ) {
     currentPreviewComponentArr.value.push(val)
   }
+
   // 删除组件
   function deletePreviewComponentItem(id: string) {
     currentPreviewComponentArr.value = currentPreviewComponentArr.value.filter(
       (item) => item.id !== id
     )
   }
+
   // 修改组件信息
-  function changePreviewComponentItem(
+  function changePreviewComponentItemProps(
     id: string,
-    val: Partial<ILegoPreviewComponent>
+    val: Partial<ILegoPreviewComponent & ILegoComponent>
   ) {
-    const previewComponent = currentPreviewComponentArr.value.find(
+    const currentPreviewComponent = currentPreviewComponentArr.value.find(
       (item) => item.id === id
     )
-
-    previewComponent && Object.assign(previewComponent, val)
+    currentPreviewComponent && Object.assign(currentPreviewComponent, val)
+    changeCurrentPreviewComProps(currentPreviewComponent!)
   }
+
   // 当前使用的component
-  const currentPreviewComponent = ref<ILegoPreviewComponent>()
-  function changeCurrentPreviewComponent(val: ILegoPreviewComponent) {
+  const currentPreviewComponent =
+    ref<Partial<ILegoPreviewComponent & ILegoComponent>>()
+  function changeCurrentPreviewComProps(
+    val: Partial<ILegoPreviewComponent & ILegoComponent>
+  ) {
     currentPreviewComponent.value = val
   }
 
   return {
+    // 所有组件信息
     componentInfo: Object.keys(allComponentRenderTemplate).reduce(
       (pre, cur) => {
         const matched = cur.match(getCompNameReg)
@@ -70,10 +81,10 @@ export const userAllComponent = defineStore('component', () => {
     // preview
     addPreviewComponentArr,
     deletePreviewComponentItem,
-    changePreviewComponentItem,
+    changePreviewComponentItemProps,
     // case
     currentPreviewComponentArr,
     currentPreviewComponent,
-    changeCurrentPreviewComponent
+    changeCurrentPreviewComProps
   }
 })

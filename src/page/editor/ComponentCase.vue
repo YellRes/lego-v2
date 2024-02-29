@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { userAllComponent } from '@/stores/component.ts'
+import { v4 } from 'uuid'
 import Draggable from 'vuedraggable'
 
 const searchVal = ref<string>('')
@@ -10,9 +11,11 @@ const getComponentData = () => {
   return {
     onStart(dragEvent: Record<string, unknown>) {
       const { oldIndex } = dragEvent
-      store.changeCurrentPreviewComponent(
-        store.componentInfo[oldIndex as number]
-      )
+
+      store.changeCurrentPreviewComProps({
+        ...store.componentInfo[oldIndex as number],
+        id: 'lego' + v4().replace(/-/g, '')
+      })
     }
   }
 }

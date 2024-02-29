@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { v4 as uuidv4 } from 'uuid'
 import { userAllComponent } from '@/stores/component.ts'
 import Calibration from './components/Calibration.vue'
 import PreviewItem from './components/Preview/PreviewItem.vue'
@@ -25,8 +24,7 @@ const handleDrop = (e: DragEvent) => {
       width: PREVIEW_COMP_WIDTH,
       height: PREVIEW_COMP_HEIGHT,
       left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
-      top: clientY - offsetTop,
-      id: 'lego' + uuidv4().replace(/-/g, '')
+      top: clientY - offsetTop
     })
 }
 
@@ -69,7 +67,7 @@ const handleTransformChange = (e) => {
     transformHeight = containerHeight.value
   }
 
-  componentStore.changePreviewComponentItem(id, {
+  componentStore.changePreviewComponentItemProps(id, {
     width: transformWidth,
     height: transformHeight,
     left: transformLeft,

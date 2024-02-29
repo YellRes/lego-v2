@@ -8,7 +8,7 @@ import { ILegoPreviewComponent } from '@/types/index'
  * */
 export function isPointInEditorComponent(
   point: { x: number; y: number },
-  componentArr: ILegoPreviewComponent[]
+  componentArr: Array<ILegoPreviewComponent & Record<string, any>>
 ): ILegoPreviewComponent | null {
   for (let i = 0; i < componentArr.length; i++) {
     const component = componentArr[i]
