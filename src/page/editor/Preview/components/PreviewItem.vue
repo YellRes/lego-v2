@@ -11,7 +11,6 @@ const emits = defineEmits(['transformChange'])
 const { class: attrClass, ...other } = useAttrs()
 
 const onDrag = (e: any) => {
-  console.log(e)
   const [deltaX, deltaY] = e.beforeDelta
   emits('transformChange', {
     deltaX: deltaX,
@@ -23,7 +22,6 @@ const onDrag = (e: any) => {
 }
 
 const onScale = (e: any) => {
-  console.log(e)
   const [scaleX, scaleY] = e.delta
   emits('transformChange', {
     deltaX: 0,

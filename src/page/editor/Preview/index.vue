@@ -77,7 +77,6 @@ const handleTransformChange = (e) => {
 
 // 当前鼠标选中
 const changeCurrentPreviewCom = (item: any) => {
-  console.log(item, 'item')
   componentStore.changeCurrentPreviewCom(item)
 }
 
@@ -119,7 +118,7 @@ const handleContextMenuClick = (e) => {
 
     <!-- 画板中的组件 -->
     <div
-      class="drop-zone h-[100%] relative p-[50px]"
+      class="drop-zone h-[100%] relative m-[50px]"
       @dragover.prevent
       @drop="handleDrop"
     >

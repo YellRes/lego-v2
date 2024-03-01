@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue'
+import { message } from 'ant-design-vue'
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue'
 
 function getBase64(img: Blob, callback: (base64Url: string) => void) {
@@ -50,12 +51,12 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
     list-type="picture-card"
     class="avatar-uploader"
     :show-upload-list="false"
-    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    action="http://101.37.228.6:83/file/uploadFile"
     :before-upload="beforeUpload"
     @change="handleChange"
   >
     <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
-    <plus-outlined></plus-outlined>
+    <plus-outlined v-else></plus-outlined>
   </a-upload>
 </template>
 
