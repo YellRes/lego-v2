@@ -13,12 +13,15 @@ const siderWidth = 300
 <template>
   <a-style-provider hash-priority="high">
     <a-layout class="h-[100%]" :style="commonStyle">
-      <a-layout-header :style="commonStyle"></a-layout-header>
+      <a-layout-header :style="commonStyle" class="h-[60px]"></a-layout-header>
 
       <a-layout>
         <a-layout-sider
           class="h-[100%] p-[8px]"
-          :style="commonStyle"
+          :style="{
+            ...commonStyle,
+            height: 'calc(100vh - 60px)'
+          }"
           :width="siderWidth"
         >
           <Case />

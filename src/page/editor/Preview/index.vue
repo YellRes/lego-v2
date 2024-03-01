@@ -96,7 +96,7 @@ const handleContextMenuClick = (e) => {
 </script>
 
 <template>
-  <div class="bg-white h-[100%] relative" ref="previewRef">
+  <div class="h-[100%] relative p-[50px]" ref="previewRef">
     <!-- 顶部刻度线 -->
     <Calibration
       :container-ref="previewRef"
@@ -118,7 +118,7 @@ const handleContextMenuClick = (e) => {
 
     <!-- 画板中的组件 -->
     <div
-      class="drop-zone h-[100%] relative m-[50px]"
+      class="drop-zone h-[100%] relative bg-white"
       @dragover.prevent
       @drop="handleDrop"
     >
