@@ -10,6 +10,7 @@ const PREVIEW_COMP_HEIGHT = 50
 
 const componentStore = userAllComponent()
 const previewRef = ref(null)
+const drawBoard = ref(null)
 
 const { width: containerWidth, height: containerHeight } =
   useElementSize(previewRef)
@@ -21,9 +22,9 @@ const handleDrop = (e: DragEvent) => {
   componentStore.currentPreviewComponent &&
     componentStore.addPreviewComponentArr({
       ...componentStore.currentPreviewComponent,
-      width: PREVIEW_COMP_WIDTH,
+      // width: PREVIEW_COMP_WIDTH,
       height: PREVIEW_COMP_HEIGHT,
-      left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
+      // left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
       top: clientY - offsetTop
     })
 }

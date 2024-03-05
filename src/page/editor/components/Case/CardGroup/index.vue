@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<ICardGroups>(), {
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <div class="flex">
       <SvgIcon :name="props.avatar || 'name'" class="w-[24px] h-[24px]" />
       <span class="text-xl">{{ props.title || '标题' }}</span>

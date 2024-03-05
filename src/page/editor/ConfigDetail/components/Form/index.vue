@@ -45,6 +45,7 @@ const handleChange = (item: any, val: any) => {
       <component
         :is="item.type"
         :value="store.currentPreviewComponent!.configData![item.key]"
+        v-bind="store.currentPreviewComponent!.configOptions![index]"
         @change="($event: string) => handleChange(item, $event)"
       />
     </a-form-item>

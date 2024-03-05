@@ -7,8 +7,9 @@ const Tabs: ILegoComponent = {
   configOptions: [
     {
       key: 'avatar',
-      type: 'LInput',
-      name: '图标'
+      type: 'LSelect',
+      name: '图标',
+      placeholder: '请选择图标'
     },
     {
       key: 'title',

@@ -42,6 +42,7 @@ const styleObject = computed(() => {
 })
 
 const componentName = markRaw(props.render)
+const renderDirection = ['e', 'se', 's']
 </script>
 
 <template>
@@ -51,9 +52,9 @@ const componentName = markRaw(props.render)
       :id="props.id"
       :class="[
         props.id === componentStore.currentPreviewComponent?.id
-          ? 'outline outline-offset-2 outline-black-500'
+          ? 'border border-colorPrimary'
           : '',
-        'absolute'
+        'absolute hover:border border-colorInfo'
       ]"
       :style="styleObject"
       :is="componentName"
@@ -62,11 +63,18 @@ const componentName = markRaw(props.render)
   </div>
 
   <Moveable
-    className="moveable"
+    className="custom-class"
     :target="`#${props.id}`"
     :draggable="true"
     :scalable="true"
+    :renderDirections="renderDirection"
     @drag="onDrag"
     @scale="onScale"
   />
 </template>
+
+<style>
+.moveable-line {
+  background: #fff !important;
+}
+</style>
