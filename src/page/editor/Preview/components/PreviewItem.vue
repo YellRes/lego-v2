@@ -6,9 +6,10 @@ import { userAllComponent } from '@/stores/component.ts'
 const componentStore = userAllComponent()
 
 // const THRESHOLD = 1
-const props = withDefaults(defineProps<ILegoPreviewComponent>(), {})
+const props = withDefaults(defineProps<Partial<ILegoPreviewComponent>>(), {})
 const emits = defineEmits(['transformChange'])
-const { class: attrClass, ...other } = useAttrs()
+const attr = useAttrs()
+// const { class: attrClass, ...other } = useAttrs()
 
 const onDrag = (e: any) => {
   const [deltaX, deltaY] = e.beforeDelta
@@ -46,7 +47,7 @@ const renderDirection = ['e', 'se', 's']
 </script>
 
 <template>
-  <div v-bind="other">
+  <div v-bind="attr">
     <!-- TODO: 优化 添加class样式不该放到该组件 -->
     <component
       :id="props.id"

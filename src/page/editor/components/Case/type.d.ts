@@ -6,7 +6,7 @@ export interface IPreviewCard {
 
 // 卡片集合
 export interface ICardGroups {
-  title: string
-  avatar: string
-  children: Array<IPreviewCard>
+  title?: string
+  avatar?: string
+  children?: Array<IPreviewCard>
 }

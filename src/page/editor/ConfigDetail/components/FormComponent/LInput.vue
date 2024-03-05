@@ -24,6 +24,7 @@ const _formValue = computed({
 
 <template>
   <a-input
+    v-bind="attr"
     v-model:value="_formValue"
     :placeholder="`请输入${attr.name || ''}`"
   />

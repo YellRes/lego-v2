@@ -11,8 +11,8 @@ const props = withDefaults(defineProps<ICardGroups>(), {
 
 <template>
   <div class="w-full">
-    <div class="flex">
-      <SvgIcon :name="props.avatar || 'name'" class="w-[24px] h-[24px]" />
+    <div class="flex items-center">
+      <SvgIcon :name="props.avatar || 'name'" class="w-[24px] h-[24px] mr-2" />
       <span class="text-xl">{{ props.title || '标题' }}</span>
     </div>
 

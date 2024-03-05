@@ -9,7 +9,22 @@ const Tabs: ILegoComponent = {
       key: 'avatar',
       type: 'LSelect',
       name: '图标',
-      placeholder: '请选择图标'
+      placeholder: '请选择图标',
+      isCustomOption: true,
+      options: [
+        {
+          label: '图片',
+          value: 'image'
+        },
+        {
+          label: '写作',
+          value: 'write'
+        },
+        {
+          label: '影音',
+          value: 'video'
+        }
+      ]
     },
     {
       key: 'title',
