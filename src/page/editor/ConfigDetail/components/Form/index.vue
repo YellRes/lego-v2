@@ -2,12 +2,14 @@
 import LInput from '../FormComponent/LInput.vue'
 import LSelect from '../FormComponent/LSelect.vue'
 import LUpload from '../FormComponent/LUpload.vue'
+import LTable from '../FormComponent/LTable.vue'
 
 export default {
   components: {
     LInput,
     LSelect,
-    LUpload
+    LUpload,
+    LTable
   }
 }
 </script>

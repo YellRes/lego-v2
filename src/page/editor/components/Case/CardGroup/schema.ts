@@ -24,12 +24,18 @@ const Tabs: ILegoComponent = {
           label: '影音',
           value: 'video'
         }
-      ]
+      ],
+      placeholder: '请选择图标'
     },
     {
       key: 'title',
       type: 'LInput',
       name: '标题'
+    },
+    {
+      key: 'cardOptions',
+      type: 'LTable',
+      name: '数据源'
     }
   ],
   configData: {}
