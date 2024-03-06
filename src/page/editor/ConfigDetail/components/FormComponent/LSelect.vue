@@ -35,11 +35,11 @@ const _formValue = computed({
       </div>
     </template>
 
-    <template v-if="attr.mode === 'tags'" #tagRender="{ value: val, label }">
+    <!-- <template v-if="attr.mode === 'tags'" #tagRender="{ value: val, label }">
       <div class="w-full flex items-center">
         <SvgIcon :name="val" class="mr-4" />
         {{ label }}
       </div>
-    </template>
+    </template> -->
   </a-select>
 </template>

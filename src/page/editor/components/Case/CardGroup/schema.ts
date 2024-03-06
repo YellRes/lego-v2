@@ -24,8 +24,7 @@ const Tabs: ILegoComponent = {
           label: '影音',
           value: 'video'
         }
-      ],
-      placeholder: '请选择图标'
+      ]
     },
     {
       key: 'title',
@@ -33,12 +32,38 @@ const Tabs: ILegoComponent = {
       name: '标题'
     },
     {
-      key: 'cardOptions',
+      key: 'cardList',
       type: 'LTable',
-      name: '数据源'
+      name: '数据源',
+      table: {
+        columns: [
+          {
+            title: '图片',
+            dataIndex: 'imgUrl',
+            key: 'imgUrl'
+          },
+          {
+            title: '标题',
+            dataIndex: 'title',
+            key: 'title'
+          },
+          {
+            title: '描述',
+            dataIndex: 'desc',
+            key: 'desc'
+          },
+          {
+            title: '操作',
+            dataIndex: 'operation',
+            key: 'operation'
+          }
+        ]
+      }
     }
   ],
-  configData: {}
+  configData: {
+    cardList: []
+  }
 }
 
 export default Tabs
