@@ -1,7 +1,8 @@
 import type { ILegoComponent } from '@/types/index'
+import type { ICardGroups } from '../type'
 
-const Tabs: ILegoComponent = {
-  name: 'cardGroup',
+const cardGroup: ILegoComponent<ICardGroups> = {
+  name: '卡片内容',
   field: 'cardGroup',
   type: 'CardGroup',
   configOptions: [
@@ -66,4 +67,4 @@ const Tabs: ILegoComponent = {
   }
 }
 
-export default Tabs
+export default cardGroup

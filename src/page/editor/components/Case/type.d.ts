@@ -8,5 +8,10 @@ export interface IPreviewCard {
 export interface ICardGroups {
   title?: string
   avatar?: string
-  children?: Array<IPreviewCard>
+  cardList?: Array<IPreviewCard>
+}
+
+// 段落
+export interface IParagraph {
+  title?: string
 }

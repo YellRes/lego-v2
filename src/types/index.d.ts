@@ -10,12 +10,12 @@ export interface ILegoComponentConfig {
 /**
  * TODO: IComponent.config的类型 是 IComponent.configData 数组中 IComponentConfig.key的集合
  * */
-export interface ILegoComponent {
+export interface ILegoComponent<T> {
   name: string
   field: string
   type: string
-  configOptions: Array<Record<string, unknown>>
-  configData: Record<string, unknown>
+  configOptions: Array<{ key: keyof T } & Record<string, unknown>>
+  configData: T
   render?: any
 }
 

@@ -78,4 +78,8 @@ const renderDirection = ['e', 'se', 's']
 .moveable-line {
   background: #fff !important;
 }
+
+.custom-class {
+  z-index: 999 !important;
+}
 </style>
