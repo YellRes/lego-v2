@@ -2,6 +2,7 @@
 import Case from './ComponentCase.vue'
 import ConfigDetail from './ConfigDetail/index.vue'
 import Preview from './Preview/index.vue'
+import TopToolBar from './TopToolBar/index.vue'
 const commonStyle = {
   background: 'transparent',
   border: '1px solid #ededed'
@@ -13,7 +14,9 @@ const siderWidth = 300
 <template>
   <a-style-provider hash-priority="high">
     <a-layout class="h-[100%]" :style="commonStyle">
-      <a-layout-header :style="commonStyle" class="h-[60px]"></a-layout-header>
+      <a-layout-header :style="commonStyle" class="h-[60px]">
+        <TopToolBar />
+      </a-layout-header>
 
       <a-layout>
         <a-layout-sider
