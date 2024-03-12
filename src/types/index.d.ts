@@ -1,3 +1,9 @@
+import type {
+  IPreviewCard,
+  ICardGroups,
+  IParagraph
+} from '@/page/editor/components/Case/type'
+
 // 定义组件详情配置
 export interface ILegoComponentConfig {
   name: string
@@ -20,7 +26,8 @@ export interface ILegoComponent<T> {
 }
 
 // 预览组件类型
-export interface ILegoPreviewComponent extends ILegoComponent {
+export interface ILegoPreviewComponent
+  extends ILegoComponent<IPreviewCard | ICardGroups | IParagraph> {
   top: number
   left: number
   width: number

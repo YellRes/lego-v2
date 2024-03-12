@@ -38,7 +38,8 @@ const styleObject = computed(() => {
     left: `${props.left}px`,
     top: `${props.top}px`,
     width: `${props.width}px`,
-    height: `${props.height}px`
+    minHeight: '50px'
+    // height: `${props.height}px`
   }
 })
 

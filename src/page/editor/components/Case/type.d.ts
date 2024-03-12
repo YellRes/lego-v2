@@ -1,7 +1,7 @@
 export interface IPreviewCard {
   imageUrl?: string
   title?: string
-  content?: string
+  desc?: string
 }
 
 // 卡片集合

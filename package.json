@@ -19,6 +19,7 @@
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
     "vue": "^3.3.8",
+    "vue-router": "^4.3.0",
     "vue3-moveable": "^0.28.0",
     "vuedraggable": "^4.1.0"
   },

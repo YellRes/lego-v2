@@ -63,6 +63,8 @@ const cardGroup: ILegoComponent<ICardGroups> = {
     }
   ],
   configData: {
+    title: '',
+    avatar: '',
     cardList: []
   }
 }

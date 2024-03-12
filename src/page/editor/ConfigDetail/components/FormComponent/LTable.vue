@@ -72,12 +72,17 @@ const addNewLine = () => {
 const onDelete = (key: string) => {
   _value.value = _value.value.filter((item) => item.key !== key)
 }
+
+const handleOk = () => {
+  emits('change', _value.value)
+  open.value = false
+}
 </script>
 
 <template>
   <!-- TODO: 很多的组件类型如何 如何配置它们的类型定义 -->
   <a-button type="primary" @click="openModal">编辑数据源</a-button>
-  <a-modal v-model:open="open" title="编辑数据源" :width="900">
+  <a-modal v-model:open="open" title="编辑数据源" :width="900" @ok="handleOk">
     <a-row justify="space-between mb-4">
       <!-- <div>
         <template v-for="(tag, index) in tags" :key="index">

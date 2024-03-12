@@ -1,7 +1,5 @@
 import type { ILegoComponent, ILegoPreviewComponent } from '@/types/index'
 
-// console.log('store is hmring')
-
 // 组件模板
 const allComponentRenderTemplate = import.meta.glob(
   '../page/editor/components/Case/**/*.vue',
