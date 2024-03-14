@@ -15,6 +15,10 @@ const siderWidth = 300
 const store = userAllComponent()
 
 const open = ref<boolean>(false)
+
+onMounted(() => {
+  store.initPreviewComponentArr()
+})
 </script>
 
 <template>

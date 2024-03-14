@@ -34,15 +34,18 @@ const router = useRouter()
     <a-row class="mt-4">
       <div
         @click="() => router.push('/editPage')"
-        class="h-[150px] w-[150px] rounded bg-gray-300 flex flex-col items-center justify-center cursor-pointer"
+        class="h-[150px] w-[150px] rounded bg-gray-300 flex flex-col items-center justify-center cursor-pointer mr-4"
       >
         <PlusOutlined />
         开始创建应用
       </div>
 
       <div
-        class="h-[150px] w-[150px] rounded bg-gray-300 flex flex-col items-center justify-center cursor-pointer0"
+        class="h-[150px] w-[150px] rounded bg-gray-300 flex flex-col items-center justify-center cursor-pointer0 mr-4"
         v-for="(item, index) in props.pageList"
+        @click="
+          () => router.push({ path: '/editPage', query: { id: item.id } })
+        "
         :key="index"
       ></div>
     </a-row>

@@ -1,4 +1,6 @@
 import type { ILegoComponent, ILegoPreviewComponent } from '@/types/index'
+import { getPageRequest } from '@/page/editor/api'
+import { useRoute } from 'vue-router'
 
 // 组件模板
 const allComponentRenderTemplate = import.meta.glob(
@@ -18,10 +20,29 @@ const allComponentConfigArr: Array<ILegoComponent> = Object.values(
 // 提取组件名称
 const getCompNameReg = /\/([^/]+)\/index\.vue$/
 
+const allComponent = Object.keys(allComponentRenderTemplate).reduce(
+  (pre, cur) => {
+    const matched = cur.match(getCompNameReg)
+
+    const currentComponentConfig = allComponentConfigArr.find(
+      (item: ILegoComponent) => item.type === matched![1]
+    )
+
+    currentComponentConfig &&
+      pre.push({
+        ...currentComponentConfig,
+        render: markRaw(allComponentRenderTemplate[cur]!.default)
+      })
+    return pre
+  },
+  [] as ILegoComponent[]
+)
+
 export const userAllComponent = defineStore('component', () => {
   const currentPreviewComponentArr = ref<
     Partial<ILegoPreviewComponent & ILegoComponent>[]
   >([])
+  const route = useRoute()
   // 添加组件
   function addPreviewComponentArr(
     val: Partial<ILegoPreviewComponent & ILegoComponent>
@@ -57,26 +78,31 @@ export const userAllComponent = defineStore('component', () => {
     currentPreviewComponent.value = val
   }
 
+  async function initPreviewComponentArr() {
+    if (route.query.id) {
+      try {
+        const data = (await getPageRequest({ id: +route.query.id })) as any
+        currentPreviewComponentArr.value = (data?.pageItem || []).map(
+          (item) => {
+            return {
+              ...item,
+              render: allComponent.find(
+                (component) => component.type === item.type
+              ).render
+            }
+          }
+        )
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  }
+
   return {
     // 所有组件信息
-    componentInfo: Object.keys(allComponentRenderTemplate).reduce(
-      (pre, cur) => {
-        const matched = cur.match(getCompNameReg)
-
-        const currentComponentConfig = allComponentConfigArr.find(
-          (item: ILegoComponent) => item.type === matched![1]
-        )
-
-        currentComponentConfig &&
-          pre.push({
-            ...currentComponentConfig,
-            render: markRaw(allComponentRenderTemplate[cur]!.default)
-          })
-        return pre
-      },
-      [] as ILegoComponent[]
-    ),
+    componentInfo: allComponent,
     // preview
+    initPreviewComponentArr,
     addPreviewComponentArr,
     deletePreviewComponentItem,
     changePreviewComponentItemProps,

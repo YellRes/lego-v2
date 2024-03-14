@@ -6,5 +6,9 @@ export default [
   {
     path: '/editPage',
     component: () => import('@/page/editor/index.vue')
+  },
+  {
+    path: '/',
+    component: () => import('@/page/homeland/index.vue')
   }
 ]

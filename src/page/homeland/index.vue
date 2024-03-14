@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { getAllPageRequest } from './api'
 import Container from './components/Container.vue'
+
+const pageList = ref<Array<{ name: string; imgUrl: string }>>([])
+onMounted(async () => {
+  try {
+    const data = (await getAllPageRequest()) as any
+    pageList.value = data || []
+  } catch (e) {
+    pageList.value = []
+    console.log(e)
+  }
+})
 </script>
 
 <template>
@@ -7,7 +19,8 @@ import Container from './components/Container.vue'
     <Container
       :title="'我的应用'"
       :linkText="'查看所有的应用'"
-      class="w-[1000px]"
+      :pageList="pageList"
+      class="w-[800px]"
     />
   </div>
 </template>
