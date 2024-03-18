@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import Moveable from 'vue3-moveable'
 import { ILegoPreviewComponent } from '@/types/index'
-import { userAllComponent } from '@/stores/component.ts'
+import { userAllComponent, useDragState } from '@/stores/component.ts'
 
 const componentStore = userAllComponent()
+const dragState = useDragState()
 
 // const THRESHOLD = 1
 const props = withDefaults(defineProps<Partial<ILegoPreviewComponent>>(), {})
@@ -38,8 +39,8 @@ const styleObject = computed(() => {
     left: `${props.left}px`,
     top: `${props.top}px`,
     width: `${props.width}px`,
-    minHeight: '50px'
-    // height: `${props.height}px`
+    minHeight: '50px',
+    height: `${props.height}px`
   }
 })
 
@@ -49,14 +50,17 @@ const renderDirection = ['e', 'se', 's']
 
 <template>
   <div v-bind="attr">
-    <!-- TODO: 优化 添加class样式不该放到该组件 -->
     <component
       :id="props.id"
       :class="[
         props.id === componentStore.currentPreviewComponent?.id
           ? 'border border-colorPrimary'
           : '',
-        'absolute hover:border border-colorInfo'
+        'absolute hover:border border-colorInfo',
+        dragState.moving &&
+        props.id !== componentStore.currentPreviewComponent?.id
+          ? 'border-dashed border-2 border-colorInfo'
+          : ''
       ]"
       :style="styleObject"
       :is="componentName"
@@ -70,6 +74,9 @@ const renderDirection = ['e', 'se', 's']
     :draggable="true"
     :scalable="true"
     :renderDirections="renderDirection"
+    v-show="props.id === componentStore.currentPreviewComponent?.id"
+    @dragStart="() => dragState.changeMoving(true)"
+    @dragEnd="() => dragState.changeMoving(false)"
     @drag="onDrag"
     @scale="onScale"
   />

@@ -23,7 +23,7 @@ const handleDrop = (e: DragEvent) => {
     componentStore.addPreviewComponentArr({
       ...componentStore.currentPreviewComponent,
       // width: PREVIEW_COMP_WIDTH,
-      // height: PREVIEW_COMP_HEIGHT,
+      height: PREVIEW_COMP_HEIGHT,
       // left: clientX - offsetLeft - PREVIEW_COMP_WIDTH * 0.5,
       top: clientY - offsetTop
     })

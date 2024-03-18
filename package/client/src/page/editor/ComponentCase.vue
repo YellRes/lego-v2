@@ -34,7 +34,7 @@ const getComponentData = () => {
       <!-- 所有的可用组件 -->
       <Draggable
         v-model="store.componentInfo"
-        group="component"
+        :group="{ name: 'canvas', pull: 'clone', put: false }"
         item-key="type"
         :move="() => false"
         :component-data="getComponentData()"

@@ -112,3 +112,15 @@ export const userAllComponent = defineStore('component', () => {
     changeCurrentPreviewCom
   }
 })
+
+// 拖动事件的状态
+export const useDragState = defineStore('drag', () => {
+  const moving = ref(false)
+
+  const changeMoving = (e: boolean) => (moving.value = e)
+
+  return {
+    moving,
+    changeMoving
+  }
+})
