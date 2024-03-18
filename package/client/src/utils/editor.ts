@@ -10,15 +10,13 @@ export function isPointInEditorComponent(
   point: { x: number; y: number },
   componentArr: Array<ILegoPreviewComponent & Record<string, any>>
 ): ILegoPreviewComponent | null {
+  // const deltaX = point.x - 50 < 0 ? 0 : point.x - 50
+  const deltaY = point.y - 50 < 0 ? 0 : point.y - 50
+
   for (let i = 0; i < componentArr.length; i++) {
     const component = componentArr[i]
-    const { top, left, width, height } = component
-    if (
-      point.x > left &&
-      point.x < left + width &&
-      point.y > top &&
-      point.y < top + height
-    ) {
+    const { top, height } = component
+    if (deltaY > top && deltaY < top + height) {
       return component
     }
   }
