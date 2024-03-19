@@ -1,21 +1,10 @@
 import type { ILegoComponent, ILegoPreviewComponent } from '@/types/index'
 import { getPageRequest } from '@/page/editor/api'
 import { useRoute } from 'vue-router'
-
-// 组件模板
-const allComponentRenderTemplate = import.meta.glob(
-  '../page/editor/components/Case/**/*.vue',
-  {
-    eager: true
-  }
-) as any
-
-// 组件配置
-const allComponentConfigArr: Array<ILegoComponent> = Object.values(
-  import.meta.glob('../page/editor/components/Case/**/schema.ts', {
-    eager: true
-  })
-).map((item: any) => item?.default)
+import {
+  allComponentConfigArr,
+  allComponentRenderTemplate
+} from '@/utils/component'
 
 // 提取组件名称
 const getCompNameReg = /\/([^/]+)\/index\.vue$/
@@ -37,6 +26,7 @@ const allComponent = Object.keys(allComponentRenderTemplate).reduce(
   },
   [] as ILegoComponent[]
 )
+console.log(allComponent, 'allComponent')
 
 export const userAllComponent = defineStore('component', () => {
   const currentPreviewComponentArr = ref<

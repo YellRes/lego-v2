@@ -34,8 +34,11 @@ watch(
       if (!rightClickMenuRef.value || !props.container) return
 
       const { clientX, clientY } = e
+
       // 容器的左上角坐标
-      const { offsetTop, offsetLeft } = props.container
+      const { y: offsetTop, x: offsetLeft } =
+        props.container.getBoundingClientRect()
+
       // 弹出菜单的宽高
       const { clientHeight, clientWidth } = rightClickMenuRef.value
 

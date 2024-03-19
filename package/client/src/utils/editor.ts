@@ -13,12 +13,7 @@ export function isPointInEditorComponent(
   for (let i = 0; i < componentArr.length; i++) {
     const component = componentArr[i]
     const { top, left, width, height } = component
-    if (
-      point.x > left &&
-      point.x < left + width &&
-      point.y > top &&
-      point.y < top + height
-    ) {
+    if (point.y > top && point.y < top + height) {
       return component
     }
   }

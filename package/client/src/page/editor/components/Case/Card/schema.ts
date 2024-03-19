@@ -1,6 +1,6 @@
 import type { ILegoComponent } from '@/types/index'
 
-const Card: ILegoComponent = {
+const Card: ILegoComponent<{ title: string; content: string }> = {
   name: '卡片',
   field: 'card',
   type: 'Card',
